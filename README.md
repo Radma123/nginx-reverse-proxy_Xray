@@ -1,7 +1,7 @@
 # nginx-reverse-proxy_Xray config
 
 
-## конфиги nginx
+## reverse proxy into xray config
 
 - root@1314874:/etc/nginx/sites-available# nano default
 - root@1314874:/etc/nginx/sites-available# nginx -t
