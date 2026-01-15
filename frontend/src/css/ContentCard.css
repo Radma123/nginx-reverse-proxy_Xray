@@ -1,0 +1,90 @@
+.content-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+}
+
+.content-card:hover {
+  transform: translateY(-5px);
+}
+
+/* ключевое: якорь для absolute */
+.content-poster {
+  position: relative;
+}
+
+.content-poster img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-bottom: 1px solid var(--border);
+}
+
+/* кнопка поверх картинки */
+.favorite-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+
+  width: 3rem;            /* без пробела */
+  height: 3rem;           /* проще чем aspect-ratio */
+  border-radius: 999px;
+
+  display: grid;
+  place-items: center;
+
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  border: 1px solid var(--border);
+  color: var(--text);
+
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.2s ease;
+
+  justify-content: center;
+}
+
+.favorite-btn:hover {
+  border-color: var(--btn-border-hover);
+  transform: scale(1.05);
+}
+
+.favorite-btn:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.content-info {
+  flex: 1;
+  padding: var(--space);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space) / 2);
+}
+
+.content-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.content-release_year {
+  font-size: 1rem;
+  color: var(--muted);
+  /* margin: 0; */
+  font-weight: 500;
+  margin-top: auto;
+}

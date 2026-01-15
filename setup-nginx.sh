@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Загружаем переменные из .env
+if [ -f .env ]; then
+    export $(cat .env | xargs)
+else
+    echo "Ошибка: Файл .env не найден!"
+    exit 1
+fi
+
+# Путь к папке конфигов на хосте
+VHOST_DIR="/fakesite/nginx/vhost"
+mkdir -p $VHOST_DIR
+
+# Создаем конфиг для gRPC и /api
+# Мы используем envsubst, чтобы подставить имя домена в название файла
+cat <<EOF > "${VHOST_DIR}/${DOMAIN}_location"
+location /api {
+    if (\$content_type !~ "application/grpc") {
+            return 404; # Отклоняем не-gRPC трафик на этом пути
+        }
+
+    client_max_body_size 0;
+    client_body_timeout 1071906480m;
+
+    grpc_set_header Host \$host;
+    grpc_set_header X-Real-IP \$remote_addr;
+
+    grpc_pass grpc://host.docker.internal:50051;
+}
+EOF
+
+echo "✅ Конфиг для ${DOMAIN} успешно создан в ${VHOST_DIR}"

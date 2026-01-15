@@ -1,0 +1,58 @@
+.nav-bar {
+  background: var(--surface);
+  padding: var(--space);
+  display: flex;
+  gap: calc(var(--space) * 2);
+
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 999px;     /* “pill” */
+  width: fit-content;
+  margin: 1rem auto 0;  /* по центру сверху с отступом */
+
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.nav-logo a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
+  padding: var(--space);
+  border-radius: 999px;
+}
+
+.nav-logo a:hover {
+  background: transparent;
+  color: var(--accent);
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space);
+}
+
+.nav-link {
+  color: var(--text);
+  text-decoration: none;
+  padding: var(--space);
+  border-radius: 999px;
+
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  outline: none;
+}
+
+/* если сделаешь NavLink (react-router) — будет подсветка активной страницы */
+.nav-link.active {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}

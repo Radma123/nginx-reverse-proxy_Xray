@@ -1,0 +1,107 @@
+/* Внешний контейнер страницы */
+.Home {
+  width: 100%;
+  max-width: 1200px;          /* чтобы контент не растягивался на весь экран */
+  margin: 0 auto;
+  padding: calc(var(--space) * 2);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space) * 2);
+}
+
+/* Форма поиска */
+.search-form {
+  display: flex;
+  gap: var(--space);
+  align-items: center;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: calc(var(--space) * 0.75);
+  box-shadow: var(--shadow);
+
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Инпут должен занимать всё свободное место */
+.search-input {
+  flex: 1;
+  min-width: 0;               /* важно, иначе flex-инпут может вылезать */
+  border: none;
+  outline: none;
+
+  background: transparent;
+  color: var(--text);
+
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+}
+
+/* placeholder — вторичный текст */
+.search-input::placeholder {
+  color: var(--muted);
+}
+
+/* Кнопка поиска — акцентная */
+.search-button {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border: 1px solid transparent;
+  border-radius: 999px;
+
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.1s ease;
+}
+
+.search-button:hover {
+  filter: brightness(1.05);
+}
+
+.search-button:active {
+  transform: scale(0.98);
+}
+
+.search-button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Сетка карточек (адаптив) */
+.content-grid {
+  display: grid;
+  gap: calc(var(--space) * 1.5);
+
+  /* магия адаптивности:
+     минимум 180px на карточку, остальное — авто */
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  align-items: start;
+}
+
+/* Важно: чтобы твои ContentCard не ломали сетку шириной 300px
+   Лучше сделать ширину карточки 100% внутри грида */
+.content-grid .content-card {
+  width: 100%;
+}
+
+/* На совсем маленьких экранах форма станет вертикальной */
+@media (max-width: 520px) {
+  .Home {
+    padding: var(--space);
+  }
+
+  .search-form {
+    border-radius: var(--radius);
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+}

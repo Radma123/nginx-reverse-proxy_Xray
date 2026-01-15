@@ -1,0 +1,123 @@
+/* 1) Design tokens (переменные) */
+:root {
+  /* Типографика */
+  --font-sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --text-size: 16px;         /* базовый размер */
+  --line: 1.5;
+
+  /* Размеры/геометрия */
+  --radius: 0.5rem;          /* 8px при 16px base */
+  --space: 1rem;             /* базовый отступ */
+
+  /* Цвета светлые основа */
+  --bg: #ffffff;
+  --text: #213547;
+  --muted: rgba(33, 53, 71, 0.7);
+
+  /* карточки */
+  --surface: #f6f6f6;
+  --border: rgba(33, 53, 71, 0.15);
+
+  /* Навигация */
+  --link: #646cff;
+  --link-hover: #747bff;
+
+  /* Кнопки */
+  --btn-bg: #f9f9f9;
+  --btn-border: transparent;
+  --btn-border-hover: #646cff;
+
+  /* Выделения */
+  --accent: #646cff;          /* основной акцент (кнопки, активные элементы) */
+  --accent-contrast: #ffffff; /* текст на акценте */
+
+  --danger: #ff4d4f;          /* ошибки/удаление */
+  --success: #2ecc71;         /* успех */
+  --warning: #f1c40f;         /* предупреждение */
+
+  --shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* 2) Если хочешь авто-светлую по системе */
+/* @media (prefers-color-scheme: light) {
+  :root {
+    --bg: #ffffff;
+    --text: #213547;
+    --muted: rgba(33, 53, 71, 0.7);
+
+    --surface: #f6f6f6;
+    --border: rgba(33, 53, 71, 0.15);
+
+    --link: #646cff;
+    --link-hover: #747bff;
+
+    --btn-bg: #f9f9f9;
+    --btn-border: transparent;
+    --btn-border-hover: #646cff;
+  }
+} */
+
+/* 3) Базовые “reset” и базовая типографика */
+html {
+  font-size: var(--text-size); /* всё в rem будет масштабироваться */
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+
+  font-family: var(--font-sans);
+  line-height: var(--line);
+
+  color: var(--text);
+  background: var(--bg);
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  font-weight: 500;
+}
+a:hover {
+  color: var(--link-hover);
+}
+
+/* Заголовки: лучше в rem, чтобы не зависели от родителя */
+h1 {
+  font-size: 2rem;   /* 32px при base 16px */
+  line-height: 1.2;
+  margin: 0;         /* ты и так сбрасываешь */
+}
+
+/* Кнопки — с переменными */
+button {
+  border-radius: var(--radius);
+  border: 1px solid var(--btn-border);
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+
+  background: var(--btn-bg);
+  color: inherit;
+
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: var(--btn-border-hover);
+}
+
+button:focus-visible {
+  outline: 3px solid var(--link);
+  outline-offset: 2px;
+}

@@ -1,0 +1,9 @@
+.main-container {
+  flex: 1;                 /* занимает всё свободное место в #root (flex-column) */
+  width: 100%;
+
+  padding: calc(var(--space) * 2); /* 2rem при --space:1rem */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space);       /* расстояние между дочерними блоками */
+}
