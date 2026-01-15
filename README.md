@@ -3,7 +3,30 @@
 [Fake mock site repo](https://github.com/Radma123/react-content-base)
 
 
-## reverse proxy into xray config
+### Setup
+__install docker first !__
+1. `git clone <repo_url>`
+2. `cp example.env .env` (enter your domain)
+3. `chmod +x setup-nginx.sh deploy.sh`
+4. `sudo ./deploy.sh`
+5. install x-ui panel `bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)`
+6.
+- enter the panel and install certs from: 
+- Certificate /fakesite/nginx/certs/(youdomain).crt
+- Private Key /fakesite/nginx/certs/(youdomain).key
+- enter (yourdomain) in x-ui panel settings
+8. Create grpc inbound with a such settings:
+   <img width="431" height="862" alt="Screenshot 2026-01-15 232741" src="https://github.com/user-attachments/assets/2911af73-48b3-4d6a-bc17-6b005bf6df1e" />
+
+
+> [!IMPORTANT]
+> ip of docker bridge: 172.17.0.1
+
+
+
+
+> [!WARNING]
+> OLD reverse proxy into xray config down below
 
 - root@1314874:/etc/nginx/sites-available# nano default
 - root@1314874:/etc/nginx/sites-available# nginx -t
