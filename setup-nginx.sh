@@ -19,7 +19,9 @@ location /api {
     if (\$content_type !~ "application/grpc") {
             return 404; # Отклоняем не-gRPC трафик на этом пути
         }
-
+    if (\$scheme != "https"){
+            return 403;
+        }
     client_max_body_size 0;
     client_body_timeout 1071906480m;
 
