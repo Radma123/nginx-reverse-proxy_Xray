@@ -29,7 +29,7 @@ services:
     networks:
       - web-network
     extra_hosts:
-      - "host.docker.internal:host-gateway" # доступ к 127.0.0.1 хоста
+      - "host.docker.internal:host-gateway" # доступ к сети хоста
 
   # SSL-сервис для сертификатов
   ssl-companion:
