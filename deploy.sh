@@ -4,6 +4,11 @@
 chmod +x setup-nginx.sh
 ./setup-nginx.sh
 
+if [ -f .env ]; then
+    export $(cat .env | xargs)
+else
+    echo "Ошибка: Файл .env не найден!"
+
 # 2. Запуск сборки
 docker compose up -d --build --remove-orphans
 
