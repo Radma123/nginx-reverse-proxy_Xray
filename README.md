@@ -1,6 +1,6 @@
 # nginx-reverse-proxy_Xray config
 
-[Fake mock site repo](https://github.com/Radma123/react-content-base)
+[My fake mock site repo](https://github.com/Radma123/react-content-base)
 
 
 ### Setup
