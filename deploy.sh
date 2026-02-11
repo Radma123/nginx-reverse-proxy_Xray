@@ -8,7 +8,7 @@ if [ -f .env ]; then
     export $(cat .env | xargs)
 else
     echo "Ошибка: Файл .env не найден!"
-
+fi
 # 2. Запуск сборки
 docker compose up -d --build --remove-orphans
 
