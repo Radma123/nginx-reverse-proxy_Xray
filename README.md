@@ -5,7 +5,7 @@
 
 ### Setup
 __install docker first !__
-1. `git clone [<repo_url>](https://github.com/Radma123/nginx-reverse-proxy_Xray.git)`
+1. `git clone https://github.com/Radma123/nginx-reverse-proxy_Xray.git`
 2. `cp example.env .env` (enter your domain)
 3. `chmod +x setup-nginx.sh deploy.sh`
 4. `sudo ./deploy.sh`
