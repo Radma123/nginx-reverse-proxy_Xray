@@ -7,10 +7,9 @@
 __install docker first !__
 1. `git clone https://github.com/Radma123/nginx-reverse-proxy_Xray.git`
 2. `cp example.env .env` (enter your domain)
-3. `chmod +x setup-nginx.sh deploy.sh`
-4. `sudo ./deploy.sh`
-5. install x-ui panel `bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)`
-6.
+3. `sudo ./deploy.sh`
+4. install x-ui panel `bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)`
+5.
 - enter the panel and install certs from: 
 - Certificate /fakesite/nginx/certs/(youdomain).crt
 - Private Key /fakesite/nginx/certs/(youdomain).key
