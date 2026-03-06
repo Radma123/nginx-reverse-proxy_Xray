@@ -14,7 +14,7 @@ __install docker first !__
 - Certificate /fakesite/nginx/certs/(youdomain).crt
 - Private Key /fakesite/nginx/certs/(youdomain).key
 - enter (yourdomain) in x-ui panel settings
-8. Create grpc inbound with a reverse proxy configuration. service name: api, external proxy: tls, (yourdomain), 443, listen: 0.0.0.0
+8. Create grpc inbound with a reverse proxy configuration. service name: api, external proxy: tls, (yourdomain), 443, listen: 0.0.0.0, port: 50051
 
 
 > [!IMPORTANT]
