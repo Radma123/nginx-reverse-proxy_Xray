@@ -25,8 +25,8 @@ if [ -z "$DOMAIN" ]; then
 fi
 
 # Генерация паролей
-HYSTERIA_PASSWORD=$(openssl rand -base64 16)
-OBFS_PASSWORD=$(openssl rand -base64 16)
+HYSTERIA_PASSWORD=$(openssl rand -hex 16)
+OBFS_PASSWORD=$(openssl rand -hex 16)
 
 # Создаем конфиг
 cat <<EOF > hysteria.yaml
