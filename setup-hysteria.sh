@@ -81,8 +81,10 @@ fi
 client_config="hysteria2://${HYSTERIA_PASSWORD}@${DOMAIN}:443?sni=${DOMAIN}&insecure=0"
 
 if [ "$HYSTERIA_OBFS" = "true" ]; then
-    client_config="${client_config}&obfs=salamander&obfs-password=${OBFS_PASSWORD}#${SERVER_NAME:-${DOMAIN}}-hysteria2"
+    client_config="${client_config}&obfs=salamander&obfs-password=${OBFS_PASSWORD}"
 fi
+
+client_config="${client_config}#${SERVER_NAME:-${DOMAIN}}-hysteria2"
 
 # Сохраняем клиентский конфиг
 echo "$client_config" > hysteria_client_config.txt
