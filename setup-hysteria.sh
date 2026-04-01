@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ -f hysteria.yaml ]; then
+    echo "Конфиг hysteria.yaml уже существует, пропускаем генерацию."
+    
+    exit 0
+fi
+
 #установка пакетов
 apt update
 apt install -y openssl qrencode
