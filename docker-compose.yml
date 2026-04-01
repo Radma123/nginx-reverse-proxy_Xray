@@ -53,6 +53,7 @@ services:
     volumes:
       - acme:/acme
       - ./hysteria.yaml:/etc/hysteria.yaml
+      - /fakesite/nginx/certs:/etc/nginx/certs:ro
     command: ["server", "-c", "/etc/hysteria.yaml"]
 
 networks:

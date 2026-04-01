@@ -2,7 +2,7 @@
 
 if [ -f hysteria.yaml ]; then
     echo "Конфиг hysteria.yaml уже существует, пропускаем генерацию."
-    
+
     exit 0
 fi
 
@@ -54,8 +54,8 @@ logging:
 
 # TLS
 tls:
-  cert: /fakesite/nginx/certs/${DOMAIN}.crt
-  key: /fakesite/nginx/certs/${DOMAIN}.key
+  cert: /etc/nginx/certs/${DOMAIN}.crt
+  key: /etc/nginx/certs/${DOMAIN}.key
   sniGuard: strict
 
 # Auth
