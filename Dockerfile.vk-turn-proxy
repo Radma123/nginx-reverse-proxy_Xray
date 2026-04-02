@@ -1,0 +1,12 @@
+FROM alpine:latest
+
+RUN apk add --no-cache wget
+
+WORKDIR /app
+
+RUN wget https://github.com/cacggghp/vk-turn-proxy/releases/download/v1.2.3/server-linux-amd64 -O /app/server && \
+    chmod +x /app/server
+
+EXPOSE 56000
+
+CMD ["/app/server", "-listen", "0.0.0.0:56000", "-connect", "host.docker.internal:65432"]

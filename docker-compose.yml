@@ -57,7 +57,9 @@ services:
     command: ["server", "-c", "/etc/hysteria.yaml"]
 
   vk-turn-proxy:
-    image: alpine:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.vk-turn-proxy
     container_name: vk-turn-proxy
     restart: always
     ports:
@@ -66,14 +68,6 @@ services:
       - web-network
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    entrypoint: /bin/sh
-    command:
-      - -c
-      - |
-        apk add --no-cache wget
-        wget https://github.com/cacggghp/vk-turn-proxy/releases/download/v1.2.3/server-linux-amd64 -O /usr/local/bin/server
-        chmod +x /usr/local/bin/server
-        /usr/local/bin/server -listen 0.0.0.0:56000 -connect host.docker.internal:65432
 
 networks:
   web-network:
