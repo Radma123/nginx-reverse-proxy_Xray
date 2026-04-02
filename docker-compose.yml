@@ -61,21 +61,13 @@ services:
       context: .
       dockerfile: Dockerfile.vk-turn-proxy
     container_name: vk-turn-proxy
-    restart: always
-    ports:
-      - "56000:56000"
-    networks:
-      - web-network
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    
-    vk-turn-proxy:
-      build:
-        context: .
-        dockerfile: Dockerfile.vk-turn-proxy
-      container_name: vk-turn-proxy
-      restart: always
-      network_mode: "host"
+    restart: unless-stopped
+    network_mode: "host"
+    command: [
+      "/app/server",
+      "-listen", "0.0.0.0:56000",
+      "-connect", "127.0.0.1:65432"
+    ]
 
 networks:
   web-network:

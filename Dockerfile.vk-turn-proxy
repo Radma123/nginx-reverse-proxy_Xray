@@ -1,12 +1,10 @@
 FROM alpine:latest
 
-RUN apk add --no-cache wget
+RUN apk add --no-cache wget ca-certificates
 
 WORKDIR /app
 
-RUN wget https://github.com/cacggghp/vk-turn-proxy/releases/download/v1.2.3/server-linux-amd64 -O /app/server && \
-    chmod +x /app/server
+RUN wget https://github.com/cacggghp/vk-turn-proxy/releases/download/v1.2.3/server-linux-amd64 -O server && \
+    chmod +x server
 
-EXPOSE 56000
-
-CMD ["/app/server", "-listen", "0.0.0.0:56000", "-connect", "127.0.0.1:65432"]
+CMD ["/app/server"]
