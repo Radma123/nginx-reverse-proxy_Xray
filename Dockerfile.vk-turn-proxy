@@ -9,4 +9,4 @@ RUN wget https://github.com/cacggghp/vk-turn-proxy/releases/download/v1.2.3/serv
 
 EXPOSE 56000
 
-CMD ["/app/server", "-listen", "0.0.0.0:56000", "-connect", "host.docker.internal:65432"]
+CMD ["/app/server", "-listen", "0.0.0.0:56000", "-connect", "127.0.0.1:65432"]

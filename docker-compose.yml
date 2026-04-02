@@ -68,6 +68,14 @@ services:
       - web-network
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    
+    vk-turn-proxy:
+      build:
+        context: .
+        dockerfile: Dockerfile.vk-turn-proxy
+      container_name: vk-turn-proxy
+      restart: always
+      network_mode: "host"
 
 networks:
   web-network:
