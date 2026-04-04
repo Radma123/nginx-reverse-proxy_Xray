@@ -4,7 +4,7 @@ RUN apk add --no-cache wget ca-certificates
 
 WORKDIR /app
 
-RUN wget https://github.com/cacggghp/vk-turn-proxy/releases/download/v1.2.3/server-linux-amd64 -O server && \
+RUN wget https://github.com/cacggghp/vk-turn-proxy/releases/latest/download/server-linux-amd64 -O server && \
     chmod +x server
 
 CMD ["/app/server"]
