@@ -35,6 +35,21 @@ EOF
 
 fi
 
+# Формируем блок congestion в зависимости от типа
+CONGESTION_TYPE="${HYSTERIA_CONGESTION_CONTROL:-brutal}"
+
+if [ "$CONGESTION_TYPE" = "brutal" ]; then
+    CONGESTION_BLOCK="transport:
+  congestion:
+    type: brutal
+    brutal:
+      upMbps: ${HYSTERIA_UP_MBPS:-300}
+      downMbps: ${HYSTERIA_DOWN_MBPS:-300}"
+else
+    CONGESTION_BLOCK="transport:
+  congestion:
+    type: ${CONGESTION_TYPE}"
+fi
 
 # Создаем конфиг
 cat <<EOF > hysteria.yaml
@@ -44,9 +59,7 @@ bandwidth:
   up: 0 mbps
   down: 0 mbps
 
-congestion:
-  type: ${HYSTERIA_CONGESTION_CONTROL:-bbr}
-  bbrProfile: standard
+${CONGESTION_BLOCK}
 
 quic:
   initStreamReceiveWindow: 8388608
@@ -78,6 +91,7 @@ masquerade:
     url: https://${DOMAIN}
     rewriteHost: true
 EOF
+
 
 # Добавляем obfs если включен
 if [ "$HYSTERIA_OBFS" = "true" ]; then
