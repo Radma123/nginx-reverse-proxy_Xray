@@ -99,6 +99,11 @@ masquerade:
     url: https://${DOMAIN}
     rewriteHost: true
 
+resolver:
+  type: udp
+  udp:
+    addr: 1.1.1.1:53
+
 outbound:
   direct:
     preferIPv4: true
