@@ -98,6 +98,10 @@ masquerade:
   proxy:
     url: https://${DOMAIN}
     rewriteHost: true
+
+outbound:
+  direct:
+    preferIPv4: true
 EOF
 
 
