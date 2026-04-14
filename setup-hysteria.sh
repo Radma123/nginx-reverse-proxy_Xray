@@ -44,9 +44,9 @@ bandwidth:
   up: 0 mbps
   down: 0 mbps
 
-transport:
-  congestion:
-    type: ${HYSTERIA_CONGESTION_CONTROL:-brutal}
+congestion:
+  type: ${HYSTERIA_CONGESTION_CONTROL:-bbr}
+  bbrProfile: standard
 
 quic:
   initStreamReceiveWindow: 8388608
