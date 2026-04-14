@@ -64,8 +64,8 @@ cat <<EOF > hysteria.yaml
 listen: :443
 
 bandwidth:
-  up: 300 mbps
-  down: 300 mbps
+  up: 500 mbps
+  down: 500 mbps
 
 ${CONGESTION_BLOCK}
 
