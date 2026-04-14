@@ -45,12 +45,20 @@ if [ "$CONGESTION_TYPE" = "brutal" ]; then
     brutal:
       upMbps: ${HYSTERIA_UP_MBPS:-300}
       downMbps: ${HYSTERIA_DOWN_MBPS:-300}"
-else
+elif [ "$CONGESTION_TYPE" = "bbr" ]; then
     CONGESTION_BLOCK="transport:
   congestion:
-    type: ${CONGESTION_TYPE}"
+    type: bbr"
+elif [ "$CONGESTION_TYPE" = "reno" ]; then
+    CONGESTION_BLOCK="transport:
+  congestion:
+    type: reno"
+else
+    echo "Неизвестный HYSTERIA_CONGESTION_CONTROL: $CONGESTION_TYPE, используем bbr"
+    CONGESTION_BLOCK="transport:
+  congestion:
+    type: bbr"
 fi
-
 # Создаем конфиг
 cat <<EOF > hysteria.yaml
 listen: :443
