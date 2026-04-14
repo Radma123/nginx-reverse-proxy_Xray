@@ -1,16 +1,10 @@
 #!/bin/bash
 
-if [ -f hysteria.yaml ]; then
-    echo "Конфиг hysteria.yaml уже существует, пропускаем генерацию."
-
-    exit 0
-fi
-
 #установка пакетов
 apt update
 apt install -y openssl qrencode
 
-# Загружаем переменные из .env
+# ==== Загружаем переменные из .env ====
 if [ -f .env ]; then
     export $(grep -v '^#' .env | xargs)
 else
@@ -24,21 +18,35 @@ if [ -z "$DOMAIN" ]; then
     exit 1
 fi
 
-# Генерация паролей
-HYSTERIA_PASSWORD=$(openssl rand -hex 16)
-OBFS_PASSWORD=$(openssl rand -hex 16)
+if [ -f hysteria_passwords.env ]; then
+    export $(grep -v '^#' hysteria_passwords.env | xargs)
+else
+    echo "Файл hysteria_passwords.env не найден, генерируем новые пароли..."
+    # Генерация паролей
+    HYSTERIA_PASSWORD=$(openssl rand -hex 16)
+    OBFS_PASSWORD=$(openssl rand -hex 16)
+
+    # Сохранение в файл
+    cat <<EOF > hysteria_passwords.env
+# время генерации: $(date)
+HYSTERIA_PASSWORD=${HYSTERIA_PASSWORD}
+OBFS_PASSWORD=${OBFS_PASSWORD}
+EOF
+
+fi
+
 
 # Создаем конфиг
 cat <<EOF > hysteria.yaml
 listen: :443
 
 bandwidth:
-  up: 0 mbps
-  down: 0 mbps
+  up: 300 mbps
+  down: 300 mbps
 
 transport:
   congestion:
-    type: bbr
+    type: ${HYSTERIA_CONGESTION_CONTROL:-brutal}
 
 quic:
   initStreamReceiveWindow: 8388608
