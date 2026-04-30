@@ -4,8 +4,8 @@ services:
     build: ./frontend
     restart: always
     environment:
-      - VIRTUAL_HOST=${DOMAIN}
-      - LETSENCRYPT_HOST=${DOMAIN}
+      - VIRTUAL_HOST=${DOMAIN},www.${DOMAIN}
+      - LETSENCRYPT_HOST=${DOMAIN},www.${DOMAIN}
       - LETSENCRYPT_EMAIL=${EMAIL}
     networks:
       - web-network
