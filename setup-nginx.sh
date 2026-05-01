@@ -56,7 +56,7 @@ location /ws {
 
 # XHTTP (SplitHTTP)
 location /upload {
-    if ($scheme != "https"){
+    if (\$scheme != "https"){
         return 403;
     }
 
@@ -66,9 +66,9 @@ location /upload {
     proxy_http_version 1.1;
 
     # Передаем оригинальные заголовки
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host \$host;
+    proxy_set_header X-Real-IP \$remote_addr;
+    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
 
     # =========================================================
     # КРИТИЧЕСКИ ВАЖНО ДЛЯ XHTTP: Отключаем любую буферизацию!
