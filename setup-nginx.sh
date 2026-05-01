@@ -58,18 +58,21 @@ location /upload {
     if (\$scheme != "https"){
         return 403;
     }
-    # Разрешаем все методы (GET и POST критичны для XHTTP)
-    proxy_set_header Host \$host;
+    proxy_pass http://host.docker.internal:50053;
+    
+    # Исправляем заголовки для работы через прокси
+    proxy_set_header Host "liexer.live";
     proxy_set_header X-Real-IP \$remote_addr;
     proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-
-    # Отключаем буферизацию (уже есть, но проверь)
+    
+    # Отключаем все виды буферизации для XHTTP
     proxy_buffering off;
     proxy_request_buffering off;
+    proxy_http_version 1.1;
     
-    # КРИТИЧНО: если Nginx запущен внутри докера, 
-    # иногда он сбрасывает POST на апстрим. Форсируем:
-    proxy_pass http://host.docker.internal:50053;
+    # Таймауты для долгоживущих соединений
+    proxy_read_timeout 1h;
+    proxy_send_timeout 1h;
 }
 
 EOF
