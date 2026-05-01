@@ -54,33 +54,23 @@ location /ws {
     proxy_read_timeout 86400;
 }
 
-# XHTTP (SplitHTTP)
 location /upload {
     if (\$scheme != "https"){
         return 403;
     }
-
-    proxy_pass http://host.docker.internal:50053;
-
-    # XHTTP требует HTTP/1.1 или выше
-    proxy_http_version 1.1;
-
-    # Передаем оригинальные заголовки
+    # Разрешаем все методы (GET и POST критичны для XHTTP)
     proxy_set_header Host \$host;
     proxy_set_header X-Real-IP \$remote_addr;
     proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
 
-    # =========================================================
-    # КРИТИЧЕСКИ ВАЖНО ДЛЯ XHTTP: Отключаем любую буферизацию!
-    # Иначе Nginx будет копить чанки, ломая стриминг трафика.
-    # =========================================================
+    # Отключаем буферизацию (уже есть, но проверь)
     proxy_buffering off;
     proxy_request_buffering off;
-
-    # Отключаем таймауты, чтобы соединения не рвались
-    proxy_read_timeout 86400;
-    proxy_send_timeout 86400;
-    keepalive_timeout 86400;
+    
+    # КРИТИЧНО: если Nginx запущен внутри докера, 
+    # иногда он сбрасывает POST на апстрим. Форсируем:
+    proxy_pass http://host.docker.internal:50053;
+}
 }
 
 EOF
