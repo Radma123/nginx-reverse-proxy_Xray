@@ -71,6 +71,5 @@ location /upload {
     # иногда он сбрасывает POST на апстрим. Форсируем:
     proxy_pass http://host.docker.internal:50053;
 }
-}
 
 EOF
