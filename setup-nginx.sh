@@ -58,6 +58,7 @@ location /upload {
     proxy_pass http://host.docker.internal:50053;
     
     # Исправляем заголовки для работы через прокси
+    proxy_set_header Host "";
     proxy_set_header X-Real-IP \$remote_addr;
     proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
     
