@@ -55,21 +55,32 @@ location /ws {
 }
 
 location /upload {
+    # Увеличиваем буферы именно для этого пути, если не добавили глобально
+    client_body_buffer_size 1m;
+    
     proxy_pass http://host.docker.internal:50053;
     
-    # Исправляем заголовки для работы через прокси
-    proxy_set_header Host "";
+    proxy_http_version 1.1; # XHTTP требует 1.1 или 2.0
+    
+    # Исправляем заголовки
+    proxy_set_header Host \$host;
     proxy_set_header X-Real-IP \$remote_addr;
     proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
     
-    # Отключаем все виды буферизации для XHTTP
+    # Отключаем буферизацию (жизненно важно для XHTTP/WebSocket/gRPC)
     proxy_buffering off;
     proxy_request_buffering off;
-    proxy_http_version 1.1;
     
-    # Таймауты для долгоживущих соединений
+    # Убираем ограничение на размер тела (для загрузки файлов через прокси)
+    client_max_body_size 0;
+
+    # Таймауты для стабильности соединения
     proxy_read_timeout 1h;
     proxy_send_timeout 1h;
+    
+    # Поддержка апгрейда соединения (на случай, если XHTTP переключится в WS-like режим)
+    proxy_set_header Upgrade \$http_upgrade;
+    proxy_set_header Connection "upgrade";
 }
 
 EOF
