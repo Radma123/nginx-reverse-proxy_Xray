@@ -55,6 +55,10 @@ location /ws {
 }
 
 location /upload {
+    if (\$scheme != "https"){
+        return 403;
+    }
+    
     # Увеличиваем буферы именно для этого пути, если не добавили глобально
     client_body_buffer_size 1m;
     
