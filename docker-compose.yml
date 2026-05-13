@@ -45,17 +45,6 @@ services:
     networks:
       - web-network
 
-  hysteria:
-    image: tobyxdd/hysteria
-    container_name: hysteria
-    restart: always
-    network_mode: "host"
-    volumes:
-      - acme:/acme
-      - ./hysteria.yaml:/etc/hysteria.yaml
-      - /fakesite/nginx/certs:/etc/nginx/certs:ro
-    command: ["server", "-c", "/etc/hysteria.yaml"]
-
   vk-turn-proxy:
     build:
       context: .

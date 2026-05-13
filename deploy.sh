@@ -4,9 +4,6 @@
 chmod +x setup-nginx.sh
 ./setup-nginx.sh
 
-# 2. Создание конфига для Hysteria
-chmod +x setup-hysteria.sh
-./setup-hysteria.sh
 
 if [ -f .env ]; then
     export $(cat .env | xargs)
